@@ -5,88 +5,88 @@
 // ---- Word lists with hints (10+ per category) --------------------
 const WORD_LISTS = {
   Animals: [
-    { word: "Elephant", hint: "Biggest land animal" },
-    { word: "Penguin", hint: "Waddles on ice" },
-    { word: "Giraffe", hint: "Tallest living animal" },
-    { word: "Dolphin", hint: "Smart swimmer with a blowhole" },
-    { word: "Chameleon", hint: "Changes its appearance" },
-    { word: "Kangaroo", hint: "Carries babies in a pouch" },
-    { word: "Octopus", hint: "Eight arms in the ocean" },
-    { word: "Flamingo", hint: "Stands on one leg, pink" },
-    { word: "Hedgehog", hint: "Curls into a spiky ball" },
-    { word: "Panther", hint: "Stealthy big cat in the dark" },
-    { word: "Koala", hint: "Sleeps in eucalyptus trees" },
-    { word: "Cheetah", hint: "Fastest runner on land" }
+    { word: "Elephant", hint: "trunk" },
+    { word: "Penguin", hint: "ice" },
+    { word: "Giraffe", hint: "tall" },
+    { word: "Dolphin", hint: "ocean" },
+    { word: "Chameleon", hint: "camouflage" },
+    { word: "Kangaroo", hint: "pouch" },
+    { word: "Octopus", hint: "tentacles" },
+    { word: "Flamingo", hint: "pink" },
+    { word: "Hedgehog", hint: "spiky" },
+    { word: "Panther", hint: "stealth" },
+    { word: "Koala", hint: "eucalyptus" },
+    { word: "Cheetah", hint: "speed" }
   ],
   Food: [
-    { word: "Sushi", hint: "Raw fish on rice" },
-    { word: "Pancake", hint: "Flat, fluffy breakfast" },
-    { word: "Burrito", hint: "Wrapped in a tortilla" },
-    { word: "Croissant", hint: "Buttery French pastry" },
-    { word: "Dumpling", hint: "Stuffed dough pocket" },
-    { word: "Lasagna", hint: "Layered pasta bake" },
-    { word: "Pretzel", hint: "Twisted and salted" },
-    { word: "Waffle", hint: "Grid-patterned breakfast" },
-    { word: "Tiramisu", hint: "Italian coffee dessert" },
-    { word: "Falafel", hint: "Fried chickpea balls" },
-    { word: "Ramen", hint: "Japanese noodle soup" },
-    { word: "Guacamole", hint: "Mashed green dip" }
+    { word: "Sushi", hint: "rice" },
+    { word: "Pancake", hint: "flat" },
+    { word: "Burrito", hint: "wrapped" },
+    { word: "Croissant", hint: "buttery" },
+    { word: "Dumpling", hint: "stuffed" },
+    { word: "Lasagna", hint: "layers" },
+    { word: "Pretzel", hint: "twisted" },
+    { word: "Waffle", hint: "grid" },
+    { word: "Tiramisu", hint: "coffee" },
+    { word: "Falafel", hint: "chickpea" },
+    { word: "Ramen", hint: "noodles" },
+    { word: "Guacamole", hint: "avocado" }
   ],
   Sports: [
-    { word: "Basketball", hint: "Shoot through a hoop" },
-    { word: "Cricket", hint: "Bat, ball, and wickets" },
-    { word: "Fencing", hint: "Sword fighting sport" },
-    { word: "Surfing", hint: "Riding ocean waves" },
-    { word: "Archery", hint: "Bow and arrow target" },
-    { word: "Badminton", hint: "Hit a shuttlecock over a net" },
-    { word: "Hockey", hint: "Puck on ice" },
-    { word: "Volleyball", hint: "Hit the ball over the net" },
-    { word: "Gymnastics", hint: "Flips and balance beams" },
-    { word: "Boxing", hint: "Punch with gloves in a ring" },
-    { word: "Rowing", hint: "Oars in the water" },
-    { word: "Skateboarding", hint: "Tricks on four wheels" }
+    { word: "Basketball", hint: "hoop" },
+    { word: "Cricket", hint: "wicket" },
+    { word: "Fencing", hint: "sword" },
+    { word: "Surfing", hint: "waves" },
+    { word: "Archery", hint: "arrow" },
+    { word: "Badminton", hint: "shuttlecock" },
+    { word: "Hockey", hint: "puck" },
+    { word: "Volleyball", hint: "net" },
+    { word: "Gymnastics", hint: "flips" },
+    { word: "Boxing", hint: "gloves" },
+    { word: "Rowing", hint: "oars" },
+    { word: "Skateboarding", hint: "wheels" }
   ],
   Places: [
-    { word: "Library", hint: "Quiet place full of books" },
-    { word: "Volcano", hint: "Mountain that erupts" },
-    { word: "Lighthouse", hint: "Guides ships at night" },
-    { word: "Castle", hint: "Kings and queens lived here" },
-    { word: "Aquarium", hint: "Fish behind glass" },
-    { word: "Pyramid", hint: "Ancient triangular tomb" },
-    { word: "Rainforest", hint: "Dense tropical jungle" },
-    { word: "Glacier", hint: "Massive slow-moving ice" },
-    { word: "Colosseum", hint: "Ancient Roman arena" },
-    { word: "Waterfall", hint: "Water plunging off a cliff" },
-    { word: "Carnival", hint: "Rides, games, and cotton candy" },
-    { word: "Observatory", hint: "Watch the stars from here" }
+    { word: "Library", hint: "books" },
+    { word: "Volcano", hint: "eruption" },
+    { word: "Lighthouse", hint: "beacon" },
+    { word: "Castle", hint: "royalty" },
+    { word: "Aquarium", hint: "fish" },
+    { word: "Pyramid", hint: "pharaoh" },
+    { word: "Rainforest", hint: "tropical" },
+    { word: "Glacier", hint: "frozen" },
+    { word: "Colosseum", hint: "gladiator" },
+    { word: "Waterfall", hint: "cascade" },
+    { word: "Carnival", hint: "rides" },
+    { word: "Observatory", hint: "stars" }
   ],
   Movies: [
-    { word: "Inception", hint: "Dreams within dreams" },
-    { word: "Titanic", hint: "Ship hits an iceberg" },
-    { word: "Jaws", hint: "Deadly shark at the beach" },
-    { word: "Frozen", hint: "Let it go, ice queen" },
-    { word: "Gladiator", hint: "Fighting in ancient Rome" },
-    { word: "Shrek", hint: "Green ogre in a swamp" },
-    { word: "Psycho", hint: "Scary motel shower scene" },
-    { word: "Avatar", hint: "Blue aliens on Pandora" },
-    { word: "Ratatouille", hint: "A rat that cooks" },
-    { word: "Interstellar", hint: "Space travel through a wormhole" },
-    { word: "Rocky", hint: "Underdog boxer from Philly" },
-    { word: "Bambi", hint: "Young deer in the forest" }
+    { word: "Inception", hint: "dreams" },
+    { word: "Titanic", hint: "iceberg" },
+    { word: "Jaws", hint: "shark" },
+    { word: "Frozen", hint: "snow" },
+    { word: "Gladiator", hint: "arena" },
+    { word: "Shrek", hint: "ogre" },
+    { word: "Psycho", hint: "motel" },
+    { word: "Avatar", hint: "Pandora" },
+    { word: "Ratatouille", hint: "rat" },
+    { word: "Interstellar", hint: "wormhole" },
+    { word: "Rocky", hint: "boxing" },
+    { word: "Bambi", hint: "deer" }
   ],
   Occupations: [
-    { word: "Astronaut", hint: "Works in outer space" },
-    { word: "Detective", hint: "Solves crimes and mysteries" },
-    { word: "Blacksmith", hint: "Forges metal with fire" },
-    { word: "Pilot", hint: "Flies planes in the sky" },
-    { word: "Surgeon", hint: "Operates in a hospital" },
-    { word: "Librarian", hint: "Organizes books for a living" },
-    { word: "Magician", hint: "Performs tricks and illusions" },
-    { word: "Firefighter", hint: "Puts out blazes" },
-    { word: "Archaeologist", hint: "Digs up ancient artifacts" },
-    { word: "Chef", hint: "Cooks in a restaurant kitchen" },
-    { word: "Electrician", hint: "Works with wires and circuits" },
-    { word: "Journalist", hint: "Writes the news" }
+    { word: "Astronaut", hint: "space" },
+    { word: "Detective", hint: "clues" },
+    { word: "Blacksmith", hint: "forge" },
+    { word: "Pilot", hint: "cockpit" },
+    { word: "Surgeon", hint: "scalpel" },
+    { word: "Librarian", hint: "shelves" },
+    { word: "Magician", hint: "illusion" },
+    { word: "Firefighter", hint: "hose" },
+    { word: "Archaeologist", hint: "ruins" },
+    { word: "Chef", hint: "kitchen" },
+    { word: "Electrician", hint: "wires" },
+    { word: "Journalist", hint: "headline" }
   ]
 };
 
@@ -251,6 +251,7 @@ function showRole() {
         <div class="role-emoji">\u{1f575}\u{fe0f}</div>
         <div class="role-label">IMPOSTER</div>
         <p class="role-name">${name}</p>
+        <p class="role-detail">Hint: <strong>${state.hint}</strong></p>
         <p class="role-detail">You do NOT know the word. Bluff!</p>
       </div>`;
   } else {
@@ -259,7 +260,6 @@ function showRole() {
         <div class="role-emoji">\u{1f60a}</div>
         <div class="role-label">CIVILIAN</div>
         <p class="role-name">${name}</p>
-        <p class="role-detail">Hint: <strong>${state.hint}</strong></p>
         <div class="role-word">${state.word}</div>
       </div>`;
   }
