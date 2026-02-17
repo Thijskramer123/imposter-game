@@ -321,6 +321,49 @@ $("#btn-new-game").addEventListener("click", () => {
   showScreen("setup");
 });
 
+// ---- Check roles screen -------------------------------------------
+$("#btn-check-roles").addEventListener("click", () => {
+  const list = $("#check-list");
+  list.innerHTML = "";
+  for (let i = 0; i < state.numPlayers; i++) {
+    const btn = document.createElement("button");
+    btn.className = "check-player-btn";
+    btn.textContent = getName(i);
+    btn.addEventListener("click", () => showCheckRole(i));
+    list.appendChild(btn);
+  }
+  showScreen("check");
+});
+
+function showCheckRole(index) {
+  const isImposter = state.roles[index];
+  const name = getName(index);
+  const content = $("#check-role-content");
+
+  if (isImposter) {
+    content.innerHTML = `
+      <div class="role-card imposter">
+        <div class="role-emoji">\u{1f575}\u{fe0f}</div>
+        <div class="role-label">IMPOSTER</div>
+        <p class="role-name">${name}</p>
+        <p class="role-detail">Hint: <strong>${state.hint}</strong></p>
+        <p class="role-detail">You do NOT know the word. Bluff!</p>
+      </div>`;
+  } else {
+    content.innerHTML = `
+      <div class="role-card civilian">
+        <div class="role-emoji">\u{1f60a}</div>
+        <div class="role-label">CIVILIAN</div>
+        <p class="role-name">${name}</p>
+        <div class="role-word">${state.word}</div>
+      </div>`;
+  }
+  showScreen("check-role");
+}
+
+$("#btn-back-check").addEventListener("click", () => showScreen("check"));
+$("#btn-back-game").addEventListener("click", () => showScreen("start-player"));
+
 // ---- Service worker registration ----------------------------------
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js").catch(() => {});
