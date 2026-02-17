@@ -87,6 +87,26 @@ const WORD_LISTS = {
     { word: "Chef", hint: "kitchen" },
     { word: "Electrician", hint: "wires" },
     { word: "Journalist", hint: "headline" }
+  ],
+  Minecraft: [
+    { word: "Diamond", hint: "precious" },
+    { word: "Creeper", hint: "explosive" },
+    { word: "Ender Pearl", hint: "throwable" },
+    { word: "Obsidian", hint: "black" },
+    { word: "Redstone", hint: "dust" },
+    { word: "Enchanting Table", hint: "magical" },
+    { word: "Nether Portal", hint: "pig" },
+    { word: "Golden Apple", hint: "ingot" },
+    { word: "Elytra", hint: "endgame" },
+    { word: "Crafting Table", hint: "grid" },
+    { word: "Bed", hint: "explodes" },
+    { word: "Torch", hint: "texture pack" },
+    { word: "Bucket", hint: "iron" },
+    { word: "Minecart", hint: "villager" },
+    { word: "TNT", hint: "water" },
+    { word: "Chest", hint: "hopper" },
+    { word: "Sword", hint: "cobweb" },
+    { word: "Cake", hint: "milk" }
   ]
 };
 
