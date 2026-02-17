@@ -47,6 +47,16 @@
         </div>
       </div>
       <p id="setup-info" class="info-text"></p>
+      <button id="btn-names" class="btn btn-primary">NEXT</button>
+    </div>
+
+    <!-- NAMES SCREEN -->
+    <div id="screen-names" class="screen">
+      <h2>Player Names</h2>
+      <p class="subtitle dim">Type a name or leave blank for default</p>
+      <div id="names-list" class="names-list">
+        <!-- filled by JS -->
+      </div>
       <button id="btn-play" class="btn btn-primary">PLAY</button>
     </div>
 
@@ -66,43 +76,19 @@
       <button id="btn-hide" class="btn btn-secondary">GOT IT &mdash; HIDE &amp; PASS</button>
     </div>
 
-    <!-- DISCUSSION SCREEN -->
-    <div id="screen-discuss" class="screen">
-      <h2>Discussion Round</h2>
+    <!-- WHO STARTS SCREEN -->
+    <div id="screen-start-player" class="screen">
+      <h2>Everyone ready?</h2>
       <div class="discuss-icon">&#x1f4ac;</div>
       <p>Everyone gives a <strong>one-word clue</strong> about the secret word.</p>
       <ul class="rules-list">
         <li><span class="green">Civilians:</span> hint without giving it away</li>
         <li><span class="red">Imposters:</span> bluff convincingly!</li>
       </ul>
+      <div id="start-player-card" class="start-card">
+        <!-- filled by JS -->
+      </div>
       <p class="subtitle dim">Discuss, argue, and accuse!</p>
-      <button id="btn-vote" class="btn btn-primary">START VOTING</button>
-    </div>
-
-    <!-- VOTING SCREEN -->
-    <div id="screen-voting" class="screen">
-      <h2 id="voting-title">Player 1, vote!</h2>
-      <p class="subtitle">Who do you think is the imposter?</p>
-      <div id="vote-buttons" class="vote-grid">
-        <!-- filled by JS -->
-      </div>
-    </div>
-
-    <!-- RESULTS SCREEN -->
-    <div id="screen-results" class="screen">
-      <h2>Results</h2>
-      <div id="results-content">
-        <!-- filled by JS -->
-      </div>
-      <button id="btn-scores" class="btn btn-primary">VIEW SCOREBOARD</button>
-    </div>
-
-    <!-- SCOREBOARD SCREEN -->
-    <div id="screen-scoreboard" class="screen">
-      <h2>Scoreboard</h2>
-      <div id="scoreboard-content">
-        <!-- filled by JS -->
-      </div>
       <div class="menu-buttons">
         <button id="btn-again" class="btn btn-primary">PLAY AGAIN</button>
         <button id="btn-new-game" class="btn btn-secondary">NEW GAME</button>

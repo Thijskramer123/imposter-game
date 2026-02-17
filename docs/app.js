@@ -34,12 +34,11 @@ const WORD_LISTS = {
 let state = {
   numPlayers: 4,
   numImposters: 1,
+  names: [],        // player names
   roles: [],        // boolean[] — true = imposter
   category: "",
   word: "",
-  currentPlayer: 0, // index during reveal & voting
-  votes: [],        // vote tally per player
-  scores: [],       // persistent across rounds
+  currentPlayer: 0, // index during reveal
 };
 
 // ---- Helpers ------------------------------------------------------
@@ -59,6 +58,10 @@ function shuffle(arr) {
 function showScreen(id) {
   $$(".screen").forEach((s) => s.classList.remove("active"));
   $(`#screen-${id}`).classList.add("active");
+}
+
+function getName(i) {
+  return state.names[i] || `Player ${i + 1}`;
 }
 
 // ---- Setup stepper logic ------------------------------------------
@@ -87,18 +90,54 @@ $$(".btn-stepper").forEach((btn) => {
   });
 });
 
+// ---- Names screen -------------------------------------------------
+function showNamesScreen() {
+  const list = $("#names-list");
+  list.innerHTML = "";
+  for (let i = 0; i < state.numPlayers; i++) {
+    const row = document.createElement("div");
+    row.className = "name-row";
+
+    const label = document.createElement("span");
+    label.className = "name-label";
+    label.textContent = `Player ${i + 1}`;
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.className = "name-input";
+    input.placeholder = `Player ${i + 1}`;
+    input.maxLength = 16;
+    input.dataset.index = i;
+    // Preserve previously entered names
+    if (state.names[i]) {
+      input.value = state.names[i];
+    }
+
+    row.appendChild(label);
+    row.appendChild(input);
+    list.appendChild(row);
+  }
+  showScreen("names");
+}
+
+function collectNames() {
+  const inputs = $$("#names-list .name-input");
+  state.names = [];
+  inputs.forEach((inp) => {
+    const val = inp.value.trim();
+    state.names.push(val || "");
+  });
+}
+
 // ---- Role assignment ----------------------------------------------
 function assignRoles() {
   const cats = Object.keys(WORD_LISTS);
   state.category = pick(cats);
   state.word = pick(WORD_LISTS[state.category]);
 
-  // pick imposter indices
   const indices = Array.from({ length: state.numPlayers }, (_, i) => i);
   const imposterSet = new Set(shuffle(indices).slice(0, state.numImposters));
   state.roles = indices.map((i) => imposterSet.has(i));
-
-  state.votes = new Array(state.numPlayers).fill(0);
 }
 
 // ---- Reveal phase -------------------------------------------------
@@ -108,12 +147,13 @@ function startReveal() {
 }
 
 function showPassScreen() {
-  $("#pass-title").textContent = `Pass to Player ${state.currentPlayer + 1}`;
+  $("#pass-title").textContent = `Pass to ${getName(state.currentPlayer)}`;
   showScreen("pass");
 }
 
 function showRole() {
   const isImposter = state.roles[state.currentPlayer];
+  const name = getName(state.currentPlayer);
   const content = $("#role-content");
 
   if (isImposter) {
@@ -121,6 +161,7 @@ function showRole() {
       <div class="role-card imposter">
         <div class="role-emoji">\u{1f575}\u{fe0f}</div>
         <div class="role-label">IMPOSTER</div>
+        <p class="role-name">${name}</p>
         <p class="role-detail">Category: <strong>${state.category}</strong></p>
         <p class="role-detail">You do NOT know the word. Bluff!</p>
       </div>`;
@@ -129,6 +170,7 @@ function showRole() {
       <div class="role-card civilian">
         <div class="role-emoji">\u{1f60a}</div>
         <div class="role-label">CIVILIAN</div>
+        <p class="role-name">${name}</p>
         <p class="role-detail">Category: <strong>${state.category}</strong></p>
         <div class="role-word">${state.word}</div>
       </div>`;
@@ -141,130 +183,20 @@ function hideAndPass() {
   if (state.currentPlayer < state.numPlayers) {
     showPassScreen();
   } else {
-    showScreen("discuss");
+    showStartPlayer();
   }
 }
 
-// ---- Voting phase -------------------------------------------------
-function startVoting() {
-  state.currentPlayer = 0;
-  state.votes = new Array(state.numPlayers).fill(0);
-  showVoteFor();
-}
+// ---- Who starts screen --------------------------------------------
+function showStartPlayer() {
+  const starterIdx = Math.floor(Math.random() * state.numPlayers);
+  const starterName = getName(starterIdx);
 
-function showVoteFor() {
-  const p = state.currentPlayer;
-  $("#voting-title").textContent = `Player ${p + 1}, vote!`;
+  $("#start-player-card").innerHTML = `
+    <div class="starter-name">${starterName}</div>
+    <div class="starter-label">goes first!</div>`;
 
-  const grid = $("#vote-buttons");
-  grid.innerHTML = "";
-  for (let i = 0; i < state.numPlayers; i++) {
-    const btn = document.createElement("button");
-    btn.className = "vote-btn" + (i === p ? " disabled" : "");
-    btn.textContent = `Player ${i + 1}`;
-    if (i !== p) {
-      btn.addEventListener("click", () => castVote(i));
-    }
-    grid.appendChild(btn);
-  }
-  showScreen("voting");
-}
-
-function castVote(targetIdx) {
-  state.votes[targetIdx]++;
-  state.currentPlayer++;
-  if (state.currentPlayer < state.numPlayers) {
-    showVoteFor();
-  } else {
-    showResults();
-  }
-}
-
-// ---- Results ------------------------------------------------------
-function showResults() {
-  const maxVotes = Math.max(...state.votes);
-  const accused = state.votes
-    .map((v, i) => (v === maxVotes ? i : -1))
-    .filter((i) => i >= 0);
-
-  let caught = false;
-  let verdictHTML = "";
-
-  if (accused.length > 1) {
-    const names = accused.map((i) => `Player ${i + 1}`).join(", ");
-    verdictHTML = `<div class="result-verdict survived">It's a tie between ${names}!<br>The imposters survive!</div>`;
-  } else {
-    const t = accused[0];
-    if (state.roles[t]) {
-      caught = true;
-      verdictHTML = `<div class="result-verdict caught">Player ${t + 1} was voted out &mdash; and they WERE an imposter!</div>`;
-    } else {
-      verdictHTML = `<div class="result-verdict survived">Player ${t + 1} was voted out &mdash; but they were INNOCENT!</div>`;
-    }
-  }
-
-  // Tally bars
-  let tallyHTML = "";
-  for (let i = 0; i < state.numPlayers; i++) {
-    const pct = maxVotes > 0 ? (state.votes[i] / maxVotes) * 100 : 0;
-    tallyHTML += `
-      <div class="tally-row">
-        <span class="tally-name">Player ${i + 1}</span>
-        <div class="tally-bar"><div class="tally-fill" style="width:${pct}%"></div></div>
-        <span class="tally-count">${state.votes[i]}</span>
-      </div>`;
-  }
-
-  // Reveal
-  const impNums = state.roles.map((r, i) => (r ? `Player ${i + 1}` : null)).filter(Boolean).join(", ");
-  const civNums = state.roles.map((r, i) => (!r ? `Player ${i + 1}` : null)).filter(Boolean).join(", ");
-
-  // Score
-  if (caught) {
-    for (let i = 0; i < state.numPlayers; i++) {
-      if (!state.roles[i]) state.scores[i]++;
-    }
-  } else {
-    for (let i = 0; i < state.numPlayers; i++) {
-      if (state.roles[i]) state.scores[i]++;
-    }
-  }
-
-  const pointsMsg = caught
-    ? `<p class="points-msg green">+1 to all civilians for catching an imposter!</p>`
-    : `<p class="points-msg red">+1 to the imposter(s) for surviving!</p>`;
-
-  $("#results-content").innerHTML = `
-    ${verdictHTML}
-    ${tallyHTML}
-    <div class="reveal-section">
-      <p class="red">Imposter(s): ${impNums}</p>
-      <p class="green">Civilians: ${civNums}</p>
-      <p style="margin-top:12px;color:var(--dim)">Category: ${state.category}</p>
-      <div class="reveal-word">${state.word}</div>
-    </div>
-    ${pointsMsg}`;
-
-  showScreen("results");
-}
-
-// ---- Scoreboard ---------------------------------------------------
-function showScoreboard() {
-  const ranking = Array.from({ length: state.numPlayers }, (_, i) => i)
-    .sort((a, b) => state.scores[b] - state.scores[a]);
-
-  let html = "";
-  ranking.forEach((i, rank) => {
-    html += `
-      <div class="score-row">
-        <span class="score-rank">${rank + 1}</span>
-        <span class="score-name">Player ${i + 1}</span>
-        <span class="score-pts">${state.scores[i]} pts</span>
-      </div>`;
-  });
-
-  $("#scoreboard-content").innerHTML = html;
-  showScreen("scoreboard");
+  showScreen("start-player");
 }
 
 // ---- Wiring -------------------------------------------------------
@@ -273,18 +205,18 @@ $("#btn-start").addEventListener("click", () => {
   showScreen("setup");
 });
 
+$("#btn-names").addEventListener("click", () => {
+  showNamesScreen();
+});
+
 $("#btn-play").addEventListener("click", () => {
-  if (!state.scores.length || state.scores.length !== state.numPlayers) {
-    state.scores = new Array(state.numPlayers).fill(0);
-  }
+  collectNames();
   assignRoles();
   startReveal();
 });
 
 $("#btn-reveal").addEventListener("click", showRole);
 $("#btn-hide").addEventListener("click", hideAndPass);
-$("#btn-vote").addEventListener("click", startVoting);
-$("#btn-scores").addEventListener("click", showScoreboard);
 
 $("#btn-again").addEventListener("click", () => {
   assignRoles();
@@ -292,7 +224,7 @@ $("#btn-again").addEventListener("click", () => {
 });
 
 $("#btn-new-game").addEventListener("click", () => {
-  state.scores = [];
+  state.names = [];
   clampSetup();
   showScreen("setup");
 });

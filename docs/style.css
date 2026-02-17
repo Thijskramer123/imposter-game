@@ -46,6 +46,7 @@ html, body {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
+  overflow-y: auto;
 }
 .screen.active {
   opacity: 1;
@@ -159,6 +160,46 @@ h2 {
   min-height: 1.2em;
 }
 
+/* ===== Names screen ===== */
+.names-list {
+  width: 100%;
+  max-width: 320px;
+  margin-top: 16px;
+}
+.name-row {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+  gap: 12px;
+}
+.name-label {
+  flex: 0 0 80px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--dim);
+  text-align: left;
+}
+.name-input {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border: 2px solid var(--dim);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+  user-select: text;
+  -webkit-user-select: text;
+}
+.name-input:focus {
+  border-color: var(--primary);
+}
+.name-input::placeholder {
+  color: #555577;
+}
+
 /* ===== Pass phone screen ===== */
 .pass-icon {
   font-size: 4rem;
@@ -185,10 +226,16 @@ h2 {
   font-size: 1.5rem;
   font-weight: 800;
   letter-spacing: 2px;
-  margin-bottom: 16px;
+  margin-bottom: 4px;
 }
 .role-card.imposter .role-label { color: var(--red); }
 .role-card.civilian .role-label { color: var(--green); }
+.role-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 12px;
+}
 .role-detail {
   font-size: 1rem;
   color: var(--dim);
@@ -201,7 +248,7 @@ h2 {
   margin-top: 8px;
 }
 
-/* ===== Discussion ===== */
+/* ===== Discussion / who starts ===== */
 .discuss-icon { font-size: 3rem; margin-bottom: 12px; }
 .rules-list {
   list-style: none;
@@ -217,118 +264,24 @@ h2 {
   color: var(--dim);
 }
 
-/* ===== Voting ===== */
-.vote-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  width: 100%;
-  max-width: 320px;
-  margin-top: 16px;
-}
-.vote-btn {
-  padding: 18px 8px;
-  border-radius: var(--radius);
-  border: 2px solid var(--dim);
+.start-card {
   background: var(--surface);
-  color: var(--text);
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
-}
-.vote-btn:active { background: var(--card); }
-.vote-btn.disabled {
-  opacity: 0.3;
-  pointer-events: none;
-}
-
-/* ===== Results ===== */
-#results-content {
-  width: 100%;
-  max-width: 340px;
-  text-align: left;
-}
-.result-verdict {
-  font-size: 1.2rem;
-  font-weight: 700;
-  text-align: center;
-  padding: 16px;
+  border: 3px solid var(--yellow);
   border-radius: var(--radius);
-  margin-bottom: 20px;
+  padding: 24px 32px;
+  margin: 20px 0 8px;
+  width: 100%;
+  max-width: 300px;
 }
-.result-verdict.caught   { background: rgba(78, 204, 163, 0.15); color: var(--green); }
-.result-verdict.survived { background: rgba(233, 69, 96, 0.15);  color: var(--red); }
-
-.tally-row {
-  display: flex;
-  align-items: center;
-  padding: 6px 0;
-  font-size: 0.95rem;
-}
-.tally-name { flex: 0 0 100px; }
-.tally-bar {
-  flex: 1;
-  height: 22px;
-  background: var(--surface);
-  border-radius: 4px;
-  overflow: hidden;
-  margin: 0 8px;
-}
-.tally-fill {
-  height: 100%;
-  background: var(--yellow);
-  border-radius: 4px;
-  transition: width 0.5s ease;
-}
-.tally-count { flex: 0 0 20px; text-align: right; font-weight: 600; }
-
-.reveal-section {
-  margin-top: 20px;
-  text-align: center;
-}
-.reveal-section p {
-  margin: 4px 0;
-  font-size: 0.95rem;
-}
-.reveal-word {
-  font-size: 1.4rem;
+.starter-name {
+  font-size: 1.8rem;
   font-weight: 800;
   color: var(--yellow);
-  margin-top: 8px;
 }
-.points-msg {
-  margin-top: 16px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  text-align: center;
-}
-
-/* ===== Scoreboard ===== */
-#scoreboard-content {
-  width: 100%;
-  max-width: 320px;
-  margin-bottom: 8px;
-}
-.score-row {
-  display: flex;
-  align-items: center;
-  padding: 10px 12px;
-  margin: 6px 0;
-  background: var(--surface);
-  border-radius: var(--radius);
+.starter-label {
   font-size: 1rem;
-}
-.score-rank {
-  font-weight: 700;
-  flex: 0 0 30px;
   color: var(--dim);
-}
-.score-row:first-child .score-rank { color: var(--yellow); }
-.score-name { flex: 1; font-weight: 600; }
-.score-pts {
-  font-weight: 800;
-  color: var(--yellow);
+  margin-top: 4px;
 }
 
 /* ===== Landscape / larger screens ===== */
