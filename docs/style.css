@@ -200,6 +200,39 @@ h2 {
   color: #555577;
 }
 
+/* ===== Category selection screen ===== */
+.category-list {
+  width: 100%;
+  max-width: 320px;
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.category-toggle {
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  border: 2px solid var(--dim);
+  background: var(--surface);
+  color: var(--dim);
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.category-toggle.selected {
+  border-color: var(--green);
+  color: var(--green);
+  background: rgba(78, 204, 163, 0.12);
+}
+.category-toggle:active {
+  transform: scale(0.95);
+}
+
 /* ===== Pass phone screen ===== */
 .pass-icon {
   font-size: 4rem;
