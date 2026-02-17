@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Imposter">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <title>Who is the Imposter?</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- TITLE SCREEN -->
+    <div id="screen-title" class="screen active">
+      <div class="title-art">
+        <div class="title-line red">WHO IS THE</div>
+        <div class="title-line yellow">IMPOSTER?</div>
+        <div class="title-emoji">&#x1f575;&#xfe0f;</div>
+      </div>
+      <p class="subtitle">A party game of bluffing &amp; deduction</p>
+      <p class="subtitle dim">Pass the phone around &mdash; don&rsquo;t peek!</p>
+      <button id="btn-start" class="btn btn-primary">START GAME</button>
+    </div>
+
+    <!-- SETUP SCREEN -->
+    <div id="screen-setup" class="screen">
+      <h2>Game Setup</h2>
+      <div class="form-group">
+        <label for="input-players">Players</label>
+        <div class="stepper">
+          <button class="btn-stepper" data-target="input-players" data-dir="-1">&minus;</button>
+          <span id="input-players" class="stepper-value">4</span>
+          <button class="btn-stepper" data-target="input-players" data-dir="1">+</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="input-imposters">Imposters</label>
+        <div class="stepper">
+          <button class="btn-stepper" data-target="input-imposters" data-dir="-1">&minus;</button>
+          <span id="input-imposters" class="stepper-value">1</span>
+          <button class="btn-stepper" data-target="input-imposters" data-dir="1">+</button>
+        </div>
+      </div>
+      <p id="setup-info" class="info-text"></p>
+      <button id="btn-play" class="btn btn-primary">PLAY</button>
+    </div>
+
+    <!-- PASS PHONE SCREEN (between reveals) -->
+    <div id="screen-pass" class="screen">
+      <div class="pass-icon">&#x1f4f1;</div>
+      <h2 id="pass-title">Pass to Player 1</h2>
+      <p class="subtitle">Don&rsquo;t look! Hand the phone over.</p>
+      <button id="btn-reveal" class="btn btn-primary">I'M READY &mdash; REVEAL MY ROLE</button>
+    </div>
+
+    <!-- ROLE REVEAL SCREEN -->
+    <div id="screen-role" class="screen">
+      <div id="role-content">
+        <!-- filled by JS -->
+      </div>
+      <button id="btn-hide" class="btn btn-secondary">GOT IT &mdash; HIDE &amp; PASS</button>
+    </div>
+
+    <!-- DISCUSSION SCREEN -->
+    <div id="screen-discuss" class="screen">
+      <h2>Discussion Round</h2>
+      <div class="discuss-icon">&#x1f4ac;</div>
+      <p>Everyone gives a <strong>one-word clue</strong> about the secret word.</p>
+      <ul class="rules-list">
+        <li><span class="green">Civilians:</span> hint without giving it away</li>
+        <li><span class="red">Imposters:</span> bluff convincingly!</li>
+      </ul>
+      <p class="subtitle dim">Discuss, argue, and accuse!</p>
+      <button id="btn-vote" class="btn btn-primary">START VOTING</button>
+    </div>
+
+    <!-- VOTING SCREEN -->
+    <div id="screen-voting" class="screen">
+      <h2 id="voting-title">Player 1, vote!</h2>
+      <p class="subtitle">Who do you think is the imposter?</p>
+      <div id="vote-buttons" class="vote-grid">
+        <!-- filled by JS -->
+      </div>
+    </div>
+
+    <!-- RESULTS SCREEN -->
+    <div id="screen-results" class="screen">
+      <h2>Results</h2>
+      <div id="results-content">
+        <!-- filled by JS -->
+      </div>
+      <button id="btn-scores" class="btn btn-primary">VIEW SCOREBOARD</button>
+    </div>
+
+    <!-- SCOREBOARD SCREEN -->
+    <div id="screen-scoreboard" class="screen">
+      <h2>Scoreboard</h2>
+      <div id="scoreboard-content">
+        <!-- filled by JS -->
+      </div>
+      <div class="menu-buttons">
+        <button id="btn-again" class="btn btn-primary">PLAY AGAIN</button>
+        <button id="btn-new-game" class="btn btn-secondary">NEW GAME</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
